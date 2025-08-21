@@ -16,7 +16,7 @@ export default function Home() {
               />
           </Link>
         </div>
-        <h2>Elowin's Tree</h2>
+        <h2>Elowin&apos;s Tree</h2>
 
         <div className={styles.ImageContainer}>
           <Link href="/thedoll">
