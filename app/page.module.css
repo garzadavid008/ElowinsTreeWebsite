@@ -165,3 +165,25 @@ a.secondary {
     filter: invert();
   }
 } */
+
+.main {
+  background: black;
+  text-align: center;
+  padding-top: 4mm;
+  color: rgb(176, 27, 251)
+}
+
+.pb {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  
+}
+
+.ImageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  gap: 2rem;           
+  min-height: 100vh;  
+}
