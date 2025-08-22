@@ -166,8 +166,14 @@ a.secondary {
   }
 } */
 
-.main {
+.page {
+  margin: 0;
+  padding: 0;
   background: black;
+  height: 100vh; 
+}
+
+.main {
   text-align: center;
   padding-top: 4mm;
   color: rgb(176, 27, 251)
