@@ -6,13 +6,15 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-      <div className={styles.pb}>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <div className={styles.pb}>
           <Link href="/ahhhh">
             <Image
               src="/pb_eyes.jpg"
               alt="PB"
               width={150}
               height={75}
+              style={{ width: '100%', maxWidth: '150px', height: 'auto' }}
               />
           </Link>
         </div>
@@ -25,6 +27,7 @@ export default function Home() {
           alt="The Doll"
           width={250}
           height={250}
+          style={{ width: '100%', maxWidth: '250px', height: 'auto'}}
         />
           </Link>
 
@@ -34,6 +37,7 @@ export default function Home() {
           alt="Side A/B"
           width={250}
           height={250}
+          style={{ width: '100%', maxWidth: '250px', height: 'auto'}}
         />
         </Link>
         </div>

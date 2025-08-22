@@ -43,7 +43,6 @@ body {
 
 .imageContainer {
   position: relative;
-  display: inline-block;
   cursor: pointer;
 }
 
@@ -54,6 +53,7 @@ body {
 }
 
 .infoBox {
+  display: flex;
   position: absolute;
   bottom: 100%;
   left: 50%;

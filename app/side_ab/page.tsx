@@ -40,6 +40,7 @@ export default function SideABPage() {
     return (
         <div className={styles.page}>
             <main className={styles.main}>
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                 <div 
                     className={`imageContainer ${active === "first" ? "active" : ""}`} 
                     onClick={() => handleImageClick("first")}
@@ -49,6 +50,7 @@ export default function SideABPage() {
                         alt="Over the Kite, Under the Grass"
                         width={250}
                         height={325}
+                        style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
                     />
                     {active === "first" && (
                         <div>
@@ -69,6 +71,7 @@ export default function SideABPage() {
                         alt="All Around You"
                         width={250}
                         height={325}
+                        style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
                     />
                     {active === "second" && (
                         <div>
