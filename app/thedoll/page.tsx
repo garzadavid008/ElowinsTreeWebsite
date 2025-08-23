@@ -6,7 +6,7 @@ export default function TheDollPage() {
       <div className={styles.page}>
         <h1>The Doll Page</h1>
         <p>This is the record page for The Doll.</p>
-        <div className={styles.dollContainer}>
+        <div className={styles.characterContainer}>
          <Character1/>
         </div>
       </div>

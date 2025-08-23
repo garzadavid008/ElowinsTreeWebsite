@@ -4,7 +4,6 @@
   align-items: center;
 }
 
-.dollContainer {
-  max-width: 500px;
-  margin-left: 7rem;
+.characterContainer {
+  width: 200px;
 }
