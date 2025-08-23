@@ -173,8 +173,8 @@ a.secondary {
 
 .main {
   text-align: center;
-  min-height: 100vh;
-  max-width: 1200px;  
+  min-height: 100vh; 
+  max-width: auto; 
   color: rgb(176, 27, 251)
 }
 
