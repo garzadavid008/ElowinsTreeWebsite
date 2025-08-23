@@ -66,3 +66,16 @@ body {
   pointer-events: none;
   z-index: 10;
 }
+
+/* SVG Line Animation */
+.line-draw {
+  stroke-dasharray: 4000;
+  stroke-dashoffset: 4000;
+  animation: dash 4s linear forwards;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

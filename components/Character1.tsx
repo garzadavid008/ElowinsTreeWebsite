@@ -1,7 +1,7 @@
 const Character1 = () => (
 	<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="100%" viewBox="0 0 704 1024" enableBackground="new 0 0 704 1024" xmlSpace="preserve">
-		<path className="line-draw" fill="none" opacity="1.000000" stroke="#000000" strokeWidth="4" 
+		<path className="line-draw" fill="#FFFFFF" opacity="1.000000" stroke="#000000" strokeWidth="4"
 			d="
 		M101.468582,1025.000000 
 			C98.039238,1022.320679 98.449280,1019.654419 100.752083,1016.708740 
