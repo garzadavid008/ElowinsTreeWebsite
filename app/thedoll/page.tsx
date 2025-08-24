@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useRef, useEffect, useState } from "react";
@@ -42,12 +41,9 @@ export default function TheDollPage() {
         <div className={styles.page}>
             <main className={styles.main}>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <div 
-                    className={`imageContainer ${active === "first" ? "active" : ""}`} 
-                    onClick={() => handleImageClick("first")}
-                >
+                <div className={`imageContainer ${active === "first" ? "active" : ""}`}>
                     <div className={styles.ccContainer}>
-                        <Doll/>
+                        <Doll onClick={() => handleImageClick("first")}/>
                     </div>
                     {active === "first" && (
                         <div>
@@ -61,4 +57,4 @@ export default function TheDollPage() {
             </main>
         </div>
     );
-  }
+}
