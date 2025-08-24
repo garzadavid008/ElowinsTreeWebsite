@@ -41,15 +41,16 @@ body {
   padding: 0;
 }
 
-.imageContainer {
+.imageContainer svg{
   position: relative;
   cursor: pointer;
+  display: inline-block;
 }
 
-.imageContainer.active {
-  outline-style: solid;
-  outline-width: .5mm;
-  outline-color: white;
+.imageContainer.active svg #g1 * {
+  stroke: white !important;
+  stroke-width: 10px !important;
+  stroke-linejoin: round !important;
 }
 
 .infoBox {

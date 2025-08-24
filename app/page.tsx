@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Character1 from "@/components/Doll";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -18,17 +19,19 @@ export default function Home() {
               />
           </Link>
         </div>
-        <h2>Elowin&apos;s Tree</h2>
 
         <div className={styles.ImageContainer}>
           <Link href="/thedoll">
-          <Image
+          {/* <Image
           src="/elowins_tree.png"
           alt="The Doll"
           width={250}
           height={250}
           style={{ width: '100%', maxWidth: '250px', height: 'auto'}}
-        />
+        /> */}
+            <div className={styles.dollContainer}>
+              <Character1/>
+            </div>
           </Link>
 
         <Link href="/side_ab">

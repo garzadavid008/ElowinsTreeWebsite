@@ -4,9 +4,9 @@
     margin: 0 auto;
     padding: 0 1rem;  
     min-height: auto;
-  }
+}
 
-  .main {
+.main {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,4 +15,4 @@
     max-width: 1200px;  
     margin: 0 auto;        
     padding: 0 1rem;        
-  }
+}

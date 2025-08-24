@@ -167,29 +167,32 @@ a.secondary {
 } */
 
 .page {
-  background: black; 
-  min-height: auto;
+  background: paleturquoise; 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .main {
-  text-align: center;
-  min-height: 100vh; 
-  max-width: auto; 
-  color: rgb(176, 27, 251)
+  flex: 1;                    /* fill remaining space */
+  display: flex;
+  flex-direction: column;     /* stack content + images */
 }
 
 .pb {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
 }
 
 .ImageContainer {
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: flex-end; 
   margin: 0 auto;        
   padding: 0 1rem;  
-  gap: 2rem;           
-  min-height: 100vh;  
+  flex: 1;                   
+}
+
+.dollContainer {
+  width: 300;
 }
