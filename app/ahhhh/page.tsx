@@ -7,7 +7,6 @@ import styles from "./page.module.css";
 
 function Background() {
   const { scene } = useThree();
-  let bgMesh;
 
   const loader = new TextureLoader();
   const texture = loader.load(
@@ -29,7 +28,7 @@ function Background() {
   material.uniforms.tEquirect.value = texture;
   const plane = new THREE.SphereGeometry(20, 20, 20);
 
-  bgMesh = new THREE.Mesh(plane, material);
+  const bgMesh = new THREE.Mesh(plane, material);
   scene.add(bgMesh);
 
   // scene.background = texture;
