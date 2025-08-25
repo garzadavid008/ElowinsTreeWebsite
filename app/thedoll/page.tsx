@@ -27,7 +27,7 @@ export default function TheDollPage() {
     useEffect(() =>{
 
         if (audioRef.current) {
-            audioRef.current.volume = soundOn ? 0.4 : 0.0;
+            audioRef.current.muted = !soundOn;
             if (active) audioRef.current.play();
           }
         
