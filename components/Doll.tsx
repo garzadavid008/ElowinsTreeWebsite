@@ -1,10 +1,12 @@
 type DollProps = {
-  onClick?: React.MouseEventHandler<SVGSVGElement>
+  onClick?: React.MouseEventHandler<SVGSVGElement>;
+  className?: string;
 }
 
-const Doll = ({onClick}: DollProps) => (
+const Doll = ({onClick, className}: DollProps) => (
 	<svg
    onClick={onClick}
+   className={className}
    version="1.1"
    id="svg1"
    width="621"

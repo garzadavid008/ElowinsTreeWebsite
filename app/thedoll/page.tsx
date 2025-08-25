@@ -13,8 +13,27 @@ export default function TheDollPage() {
     const handleImageClick = (song: "first" | "second" | "third" | "fourth") => {
         if (active === song){
             const link = document.createElement("a");
-            link.href = song === "first" ? "/Over the Kite, Under the Tree.wav" : "/All Around You.wav";
-            link.download = song === "first" ? "Over the Kite, Under the Tree" : "All Around You";
+            
+            switch (song) {
+                case "first":
+                  link.href = "/Cloud Catching.wav";
+                  link.download = "Cloud Catching";
+                  break;
+                case "second":
+                  link.href = "/Bird in the Hand.wav";
+                  link.download = "Bird in the Hand";
+                  break;
+                case "third":
+                  link.href = "/wireBox.wav";
+                  link.download = "wireBox";
+                  break;
+                case "fourth":
+                  link.href = "/Flashback.wav";
+                  link.download = "Flashback";
+                  break;
+                default:
+                  console.warn("Unknown song choice:", song);
+              }
             link.click()
         } else {
             setActive(song)
@@ -41,18 +60,40 @@ export default function TheDollPage() {
         <div className={styles.page}>
             <main className={styles.main}>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <div className={`imageContainer ${active === "first" ? "active" : ""}`}>
-                    <div className={styles.ccContainer}>
-                        <Doll onClick={() => handleImageClick("first")}/>
-                    </div>
-                    {active === "first" && (
-                        <div>
-                            <span className="infoBox">
-                                Download Cloud Catching.wav
-                            </span>
-                            <audio ref={audioRef} src="/sounds/OTKUTT Sample.wav" loop/>
-                        </div>
-                    )}
+                <div className={`${styles.ccContainer} ${active === "first" ? styles.active : ""}`}>
+                    <Doll onClick={() => handleImageClick("first")}/>
+                        {active === "first" && (
+                            <div>
+                                <span className={styles.ccText}>
+                                    Download Cloud Catching.wav
+                                </span>
+                                <audio ref={audioRef} src="/sounds/OTKUTT Sample.wav" loop/>
+                            </div>
+                        )}
+                </div>
+
+                <div className={`${styles.bthContainer} ${active === "second" ? styles.active : ""}`}>
+                    <Doll onClick={() => handleImageClick("second")}/>
+                        {active === "second" && (
+                            <div>
+                                <span className={styles.bthText}>
+                                    Download Bird in the Hand.wav
+                                </span>
+                                <audio ref={audioRef} src="/sounds/OTKUTT Sample.wav" loop/>
+                            </div>
+                        )}
+                </div>
+
+                <div className={`${styles.wbContainer} ${active === "third" ? styles.active : ""}`}>
+                    <Doll onClick={() => handleImageClick("third")}/>
+                        {active === "third" && (
+                            <div>
+                                <span className={styles.wbText}>
+                                    Download wireBox.wav
+                                </span>
+                                <audio ref={audioRef} src="/sounds/OTKUTT Sample.wav" loop/>
+                            </div>
+                        )}
                 </div>
             </main>
         </div>

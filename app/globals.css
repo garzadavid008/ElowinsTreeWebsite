@@ -41,33 +41,6 @@ body {
   padding: 0;
 }
 
-.imageContainer svg{
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-}
-
-.imageContainer.active svg #g1 * {
-  stroke: white !important;
-  stroke-width: 10px !important;
-  stroke-linejoin: round !important;
-}
-
-.infoBox {
-  display: flex;
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  color: black;
-  padding: 4px 8px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  pointer-events: none;
-  z-index: 10;
-}
-
 /* SVG Line Animation */
 .line-draw {
   stroke-dasharray: 9816;

@@ -11,11 +11,93 @@
   padding: 0 1rem;        
 }
 
-.ccContainer svg {
-  width: 20vw;
-  height: auto;
-  margin-top: 20vw;
+.active svg path {
+  stroke: white !important;
+  stroke-width: 10px !important;
+  stroke-linejoin: round !important;
+}
+
+.ccContainer {
+  margin-top: 40vw;
+  margin-right: 30vw;
+  cursor: pointer;
+  display: block; 
+  position: absolute;
   transform: scaleY(-1);
 }
+
+.ccContainer svg {
+  width: 15vw;
+  height: auto;
+}
+
+.ccText {
+  position: fixed;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(50%);
+  background: white;
+  color: black;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.bthContainer {
+  margin-top: 90vw;
+  cursor: pointer;
+  display: block; 
+  position: absolute;
+  transform: rotate(90deg);
+}
+
+.bthContainer svg {
+  width: 15vw;
+  height: auto;
+}
+
+.bthText {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-90deg);
+  background: white;
+  color: black;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.wbContainer {
+  margin-top: 40vw;
+  margin-left: 30vw;
+  cursor: pointer;
+  display: block; 
+  position: absolute;
+}
+
+.wbContainer svg {
+  width: 15vw;
+  height: auto;
+}
+
+.wbText {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-90deg);
+  background: white;
+  color: black;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  pointer-events: none;
+  z-index: 10;
+}
+
 
 
