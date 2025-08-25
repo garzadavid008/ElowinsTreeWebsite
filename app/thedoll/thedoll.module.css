@@ -1,4 +1,5 @@
 .page{
+  min-height: 100vh;
   background: rgb(219, 193, 255);
 }
 
@@ -6,10 +7,47 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 100vh;
   max-width: 1200px;         
   padding: 0 1rem;        
 }
+
+.soundContainer {
+  position: fixed;    
+  top: 1rem;            
+  right: 1rem;      
+  
+  background: rgba(0, 0, 0, 0.7);  
+  color: white;         
+  padding: 0.5rem 1rem; 
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: 'Courier New', Courier, monospace;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  cursor: pointer;;
+  z-index: 1000;   
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 140vw;
+  margin: 0 auto;
+}
+
+.char {                  
+  position: absolute;
+  cursor: pointer;
+}
+
+.char svg {
+  width: 15vw;
+  height: auto;
+}
+
+.ccContainer { top: 20%; left: 30%; transform: scaleY(-1); }
+.wbContainer { top: 20%; right: 30%; }
+.bthContainer { top: 50%; left: 45%; transform: rotate(90deg); }
+.fbContainer { top: 70%; left: 45%; transform: rotate(-90deg); }
 
 .active svg path {
   stroke: white !important;
@@ -17,84 +55,66 @@
   stroke-linejoin: round !important;
 }
 
-.ccContainer {
-  margin-top: 40vw;
-  margin-right: 30vw;
-  cursor: pointer;
-  display: block; 
-  position: absolute;
-  transform: scaleY(-1);
-}
-
-.ccContainer svg {
-  width: 15vw;
-  height: auto;
-}
 
 .ccText {
   position: fixed;
   bottom: 100%;
   left: 50%;
-  transform: translateX(50%);
+  transform: translateX(-50%) scaleY(-1);
   background: white;
   color: black;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
+  font-family: 'Courier New', Courier, monospace;
   pointer-events: none;
   z-index: 10;
 }
 
-.bthContainer {
-  margin-top: 90vw;
-  cursor: pointer;
-  display: block; 
-  position: absolute;
-  transform: rotate(90deg);
-}
-
-.bthContainer svg {
-  width: 15vw;
-  height: auto;
-}
 
 .bthText {
   position: absolute;
-  bottom: 100%;
-  left: 50%;
+  left: -50%;
+  bottom: 50%;
   transform: translateX(-50%) rotate(-90deg);
   background: white;
   color: black;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
+  font-family: 'Courier New', Courier, monospace;
   pointer-events: none;
   z-index: 10;
 }
 
-.wbContainer {
-  margin-top: 40vw;
-  margin-left: 30vw;
-  cursor: pointer;
-  display: block; 
-  position: absolute;
-}
-
-.wbContainer svg {
-  width: 15vw;
-  height: auto;
-}
 
 .wbText {
   position: absolute;
   bottom: 100%;
   left: 50%;
-  transform: translateX(-50%) rotate(-90deg);
+  transform: translateX(-50%) ;
   background: white;
   color: black;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
+  font-family: 'Courier New', Courier, monospace;
+  pointer-events: none;
+  z-index: 10;
+}
+
+
+.fbText {
+  position: absolute;
+  left: -50%;
+  bottom: 50%;
+  transform: translateX(-50%) rotate(90deg);
+  background: white;
+  color: black;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-family: 'Courier New', Courier, monospace;
   pointer-events: none;
   z-index: 10;
 }

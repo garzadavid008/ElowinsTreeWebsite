@@ -7,46 +7,30 @@ import styles from "./thedoll.module.css";
 import Doll from "@/components/Doll";
 
 export default function TheDollPage() {
-    const [active, setActive] = useState<"first" | "second" | "third"| "fourth" | null>(null);
+    const [active, setActive] = useState<"Cloud Catching" | "Bird in the Hand" | "wireBox"| "Flashback" | null>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [soundOn, setSoundOn] = useState(true);
 
-    const handleImageClick = (song: "first" | "second" | "third" | "fourth") => {
+    const handleImageClick = (song: "Cloud Catching" | "Bird in the Hand" | "wireBox" | "Flashback") => {
         if (active === song){
             const link = document.createElement("a");
-            
-            switch (song) {
-                case "first":
-                  link.href = "/Cloud Catching.wav";
-                  link.download = "Cloud Catching";
-                  break;
-                case "second":
-                  link.href = "/Bird in the Hand.wav";
-                  link.download = "Bird in the Hand";
-                  break;
-                case "third":
-                  link.href = "/wireBox.wav";
-                  link.download = "wireBox";
-                  break;
-                case "fourth":
-                  link.href = "/Flashback.wav";
-                  link.download = "Flashback";
-                  break;
-                default:
-                  console.warn("Unknown song choice:", song);
-              }
+            link.href = `/${song}.wav`
+            link.download = song
             link.click()
         } else {
             setActive(song)
         }
     }
+
     const resetAll = () => setActive(null);
 
     useEffect(() =>{
-        if (active && audioRef.current){
-            audioRef.current.volume = 0.4;
-            audioRef.current.play()
-        }
 
+        if (audioRef.current) {
+            audioRef.current.volume = soundOn ? 0.4 : 0.0;
+            if (active) audioRef.current.play();
+          }
+        
         const handleClickOutside = (e: MouseEvent) => {
             if (!(e.target as HTMLElement).closest(".imageContainer")){
                 resetAll()
@@ -54,46 +38,70 @@ export default function TheDollPage() {
         };
         document.addEventListener("click", handleClickOutside);
     return () => document.removeEventListener("click", handleClickOutside);
-    }, [active]);
+    }, [active, soundOn]);
 
     return (
         <div className={styles.page}>
+
+            {active != null && (
+                <div className={styles.soundContainer} onClick={() => setSoundOn(prev => !prev)}>
+                    <span>
+                        {soundOn ? 'Playing ' : "" }
+                        {active}
+                        </span>
+                </div>
+            )}
+
             <main className={styles.main}>
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <div className={`${styles.ccContainer} ${active === "first" ? styles.active : ""}`}>
-                    <Doll onClick={() => handleImageClick("first")}/>
-                        {active === "first" && (
-                            <div>
-                                <span className={styles.ccText}>
-                                    Download Cloud Catching.wav
-                                </span>
-                                <audio ref={audioRef} src="/sounds/OTKUTT Sample.wav" loop/>
-                            </div>
-                        )}
-                </div>
+                <div className={styles.stage}>
+                    <div className={`${styles.char} ${styles.ccContainer} ${active === "Cloud Catching" ? styles.active : ""}`}>
+                        <Doll onClick={() => handleImageClick("Cloud Catching")}/>
+                            {active === "Cloud Catching" && (
+                                <div>
+                                    <span className={styles.ccText}>
+                                        Download Cloud Catching.wav
+                                    </span>
+                                    <audio ref={audioRef} src="/sounds/CC Sample.wav" loop/>
+                                </div>
+                            )}
+                    </div>
 
-                <div className={`${styles.bthContainer} ${active === "second" ? styles.active : ""}`}>
-                    <Doll onClick={() => handleImageClick("second")}/>
-                        {active === "second" && (
-                            <div>
-                                <span className={styles.bthText}>
-                                    Download Bird in the Hand.wav
-                                </span>
-                                <audio ref={audioRef} src="/sounds/OTKUTT Sample.wav" loop/>
-                            </div>
-                        )}
-                </div>
+                    <div className={`${styles.char} ${styles.bthContainer} ${active === "Bird in the Hand" ? styles.active : ""}`}>
+                        <Doll onClick={() => handleImageClick("Bird in the Hand")}/>
+                            {active === "Bird in the Hand" && (
+                                <div>
+                                    <span className={styles.bthText}>
+                                        Download Bird in the Hand.wav
+                                    </span>
+                                    <audio ref={audioRef} src="/sounds/BTH Sample.wav" loop/>
+                                </div>
+                            )}
+                    </div>
 
-                <div className={`${styles.wbContainer} ${active === "third" ? styles.active : ""}`}>
-                    <Doll onClick={() => handleImageClick("third")}/>
-                        {active === "third" && (
-                            <div>
-                                <span className={styles.wbText}>
-                                    Download wireBox.wav
-                                </span>
-                                <audio ref={audioRef} src="/sounds/OTKUTT Sample.wav" loop/>
-                            </div>
-                        )}
+                    <div className={`${styles.char} ${styles.wbContainer} ${active === "wireBox" ? styles.active : ""}`}>
+                        <Doll onClick={() => handleImageClick("wireBox")}/>
+                            {active === "wireBox" && (
+                                <div>
+                                    <span className={styles.wbText}>
+                                        Download wireBox.wav
+                                    </span>
+                                    <audio ref={audioRef} src="/sounds/WB Sample.wav" loop/>
+                                </div>
+                            )}
+                    </div>
+
+                    <div className={`${styles.char} ${styles.fbContainer} ${active === "Flashback" ? styles.active : ""}`}>
+                        <Doll onClick={() => handleImageClick("Flashback")}/>
+                            {active === "Flashback" && (
+                                <div>
+                                    <span className={styles.fbText}>
+                                        Download Flashback.wav
+                                    </span>
+                                    <audio ref={audioRef} src="/sounds/FB Sample.wav" loop/>
+                                </div>
+                            )}
+                    </div>
                 </div>
             </main>
         </div>
