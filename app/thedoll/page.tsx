@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "./thedoll.module.css";
 import Doll from "@/components/Doll";
+import Unmute from "@/components/Unmute"
+import Mute from "@/components/Mute"
 
 export default function TheDollPage() {
     const [active, setActive] = useState<"Cloud Catching" | "Bird in the Hand" | "wireBox"| "Flashback" | null>(null);
@@ -46,9 +48,8 @@ export default function TheDollPage() {
             {active != null && (
                 <div className={styles.soundContainer} onClick={() => setSoundOn(prev => !prev)}>
                     <span>
-                        {soundOn ? 'Playing ' : "" }
-                        {active}
-                        </span>
+                        {soundOn ? <Unmute/> : <Mute/>}
+                    </span>
                 </div>
             )}
 

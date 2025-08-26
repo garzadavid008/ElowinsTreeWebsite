@@ -1,49 +1,36 @@
 import Image from "next/image";
 import Link from "next/link";
-import Character1 from "@/components/Doll";
+import Doll from "@/components/Doll";
+import Kevin from "@/components/Kevin";
+import Robot from "@/components/Robot";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <div className={styles.pb}>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <div className={`${styles.robotChar}`}>
           <Link href="/ahhhh">
-            <Image
-              src="/pb_eyes.jpg"
-              alt="PB"
-              width={150}
-              height={75}
-              style={{ width: '100%', maxWidth: '150px', height: 'auto' }}
-              />
+            <Robot/>
           </Link>
         </div>
 
-        <div className={styles.ImageContainer}>
-          <Link href="/thedoll">
-          {/* <Image
-          src="/elowins_tree.png"
-          alt="The Doll"
-          width={250}
-          height={250}
-          style={{ width: '100%', maxWidth: '250px', height: 'auto'}}
-        /> */}
-            <div className={styles.dollContainer}>
-              <Character1/>
-            </div>
-          </Link>
+        <div className={styles.dollKevContainer}>
+          <div className={styles.dollChar}>
+            <Link href="/thedoll">
+                <Doll/>
+            </Link>
+          </div>
 
-        <Link href="/side_ab">
-        <Image
-          src="/side_ab.jpg"
-          alt="Side A/B"
-          width={250}
-          height={250}
-          style={{ width: '100%', maxWidth: '250px', height: 'auto'}}
-        />
-        </Link>
+          <div className={styles.kevinChar}>
+            <Link href="/side_ab">
+              <Kevin/>
+            </Link>
+          </div>
         </div>
+        
       </main>
     </div>
   );
