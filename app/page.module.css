@@ -1,14 +1,47 @@
 
 .page {
-  background: paleturquoise; 
-  min-height: 100vh;
-  display: flex;
+  height: 100vh; /* full viewport height */
+  width: 100vw;
+  background: linear-gradient(132deg, #B5E1FF,#DC96FA,#C9FFF0,#ffffff);
+  background-size: 400% 400%;
+  animation: BackgroundGradient 15s ease infinite;
+}
+
+@keyframes BackgroundGradient {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
 }
 
 .main {      
   display: flex;
   justify-content: center ;
   align-items: center;
+}
+
+.elowinsContainer {
+  display: flex;
+  flex-direction: row;
+  position: fixed;    
+  top: 1rem;            
+  left: 1rem; 
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 130%;
+  color: black;
+  gap: 10%;
+}
+
+@media (max-aspect-ratio: 1/1) {
+  .elowinsContainer span {
+    writing-mode: vertical-rl;
+  }
+}
+
+.rectangle {
+  width: 3px;
+  height: 200px;
+  flex-shrink: 0;
+  background: black;
 }
 
 .dollKevContainer {

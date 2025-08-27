@@ -11,6 +11,11 @@ export default function Home() {
       <main className={styles.main}>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+        <div className={styles.elowinsContainer}>
+          <span>Elowin&apos;s Tree</span>
+          <div className={styles.rectangle}></div>
+        </div>
+
         <div className={`${styles.robotChar}`}>
           <Link href="/ahhhh">
             <Robot/>
@@ -30,7 +35,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        
+
       </main>
     </div>
   );
