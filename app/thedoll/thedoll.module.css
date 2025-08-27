@@ -29,7 +29,8 @@
 }
 
 .soundContainer svg {
-  width: 3vw;
+  width: 5vw;
+  max-width: 30px;
   height: auto;
 }
 
