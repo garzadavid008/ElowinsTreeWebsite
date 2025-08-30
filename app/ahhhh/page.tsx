@@ -10,10 +10,11 @@ function Background() {
 
   const loader = new TextureLoader();
   const texture = loader.load(
-      "https://threejsfundamentals.org/threejs/resources/images/equirectangularmaps/tears_of_steel_bridge_2k.jpg"
+      "/tears_of_steel_bridge_2k_robot5.jpg",
   );
   texture.magFilter = THREE.LinearFilter; // what the flip is this?
   texture.minFilter = THREE.LinearFilter; // what the flip is this?
+  texture.colorSpace = THREE.SRGBColorSpace;
 
   const shader = THREE.ShaderLib.equirect;
 
@@ -22,7 +23,7 @@ function Background() {
       vertexShader: shader.vertexShader,
       uniforms: shader.uniforms,
       depthWrite: false,
-      side: THREE.BackSide
+      side: THREE.BackSide,
   });
 
   material.uniforms.tEquirect.value = texture;
@@ -39,7 +40,7 @@ export default function TeaserPage() {
   return (
     <div className={styles.page}>
       <div>
-        <Canvas camera={{ position: [0, 0, 40], fov: 120}}>
+        <Canvas camera={{ position: [0, 0, 10], fov: 120}}>
           <OrbitControls/>
           <Background />
           <ambientLight intensity={0.5}/>
