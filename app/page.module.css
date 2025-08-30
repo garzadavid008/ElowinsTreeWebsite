@@ -22,7 +22,7 @@
 .elowinsContainer {
   display: flex;
   flex-direction: row;
-  position: fixed;    
+  position: absolute;    
   top: 1rem;            
   left: 1rem; 
   font-family: 'Courier New', Courier, monospace;
@@ -47,12 +47,10 @@
 .dollKevContainer {
   position: absolute;
   bottom: 0;         
-  left: 0;
   width: 100%;        
   display: flex;    
   align-items: flex-end;  
-  justify-content: center;
-  gap: 2rem;         
+  justify-content: center;         
 }
 
 
@@ -61,20 +59,13 @@
 }
 
 .dollChar {
-  width: 25%;  
-  max-width: 250px;     /* never get bigger than this */
-  min-width: 160px; 
+  max-width: 300px;     /* never get bigger than this */
+  min-width: 200px; 
 }
 
 .kevinChar {
-  width: 20%;
-  max-width: 180px;
+  max-width: 210px;
   min-width: 110px;
-}
-
-.dollChar svg, .kevinChar svg {
-  width: 100%;
-  height: auto;
 }
 
 .robotChar {                  
@@ -92,6 +83,3 @@
   width: 100%;
   height: auto;
 }
-
-/* .dollContainer {top: 41%; left: 4%;}
-.kevinContainer {top: 67.5%; left: 50%;} */
