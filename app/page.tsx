@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 import Doll from "@/components/Doll";
 import Kevin from "@/components/Kevin";
 import Robot from "@/components/Robot";
@@ -7,9 +8,9 @@ import styles from "./page.module.css";
 
 export default function Home() {
   return (
+    
     <div className={styles.page}>
       <main className={styles.main}>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <div className={styles.elowinsContainer}>
           <span>Elowin&apos;s Tree</span>
@@ -25,13 +26,26 @@ export default function Home() {
         <div className={styles.dollKevContainer}>
           <div className={styles.dollChar}>
             <Link href="/thedoll">
-                <Doll/>
+            <Image
+              src="/characters/DollFill.svg"
+              alt="Doll"
+              width={200} 
+              height={200}  
+              style={{ width: "75%", height: "auto", objectFit: "contain" }}
+            />
+  
             </Link>
           </div>
 
           <div className={styles.kevinChar}>
             <Link href="/side_ab">
-              <Kevin/>
+              <Image
+                src="/characters/KevinFill.svg"
+                alt="Kevin"
+                width={200} 
+                height={200}  
+                style={{ width: "70%", height: "auto", objectFit: "contain" }}
+              />
             </Link>
           </div>
         </div>
