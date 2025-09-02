@@ -2,6 +2,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Canvas, useThree, useLoader, useFrame } from "@react-three/fiber";
 import { OrbitControls, Html, TransformControls } from "@react-three/drei";
+
 import { TextureLoader } from "three";
 import * as THREE from 'three'
 import styles from "./page.module.css";
@@ -89,61 +90,61 @@ function HotspotImage({ position, src, width = 10, height = 10, onClick }: Hotsp
   );
 }
 
-function DebugMarker({ initialPosition }: { initialPosition: THREE.Vector3 }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const transformRef = useRef<any>(null);
-  const [position, setPosition] = useState(initialPosition);
+// function DebugMarker({ initialPosition }: { initialPosition: THREE.Vector3 }) {
+//   const meshRef = useRef<THREE.Mesh>(null);
+//   const transformRef = useRef<any>(null);
+//   const [position, setPosition] = useState(initialPosition);
 
-  const { camera, gl } = useThree();
+//   const { camera, gl } = useThree();
 
-  // Only assign object when mesh exists
-  useEffect(() => {
-    if (meshRef.current && transformRef.current) {
-      transformRef.current.attach(meshRef.current);
-    }
-  }, []);
+//   // Only assign object when mesh exists
+//   useEffect(() => {
+//     if (meshRef.current && transformRef.current) {
+//       transformRef.current.attach(meshRef.current);
+//     }
+//   }, []);
 
-  // Keep marker on sphere
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.position.copy(
-        meshRef.current.position.clone().normalize().multiplyScalar(19.9)
-      );
-      setPosition(meshRef.current.position.clone());
-    }
-  });
+//   // Keep marker on sphere
+//   useFrame(() => {
+//     if (meshRef.current) {
+//       meshRef.current.position.copy(
+//         meshRef.current.position.clone().normalize().multiplyScalar(19.9)
+//       );
+//       setPosition(meshRef.current.position.clone());
+//     }
+//   });
 
-  return (
-    <>
-      <TransformControls ref={transformRef} camera={camera} domElement={gl.domElement} />
-      <mesh
-        ref={meshRef}
-        position={position}
-        // onClick={() =>
-        //   alert(
-        //     `Marker position: [${position.x.toFixed(2)}, ${position.y.toFixed(
-        //       2
-        //     )}, ${position.z.toFixed(2)}]`
-        //   )
-        // }
-        onClick={() => {
-          const originalVectorLength = Math.sqrt(5*5 + 1*1 + (-5)*(-5));
-          const radius = 19.9;
+//   return (
+//     <>
+//       <TransformControls ref={transformRef} camera={camera} domElement={gl.domElement} />
+//       <mesh
+//         ref={meshRef}
+//         position={position}
+//         // onClick={() =>
+//         //   alert(
+//         //     `Marker position: [${position.x.toFixed(2)}, ${position.y.toFixed(
+//         //       2
+//         //     )}, ${position.z.toFixed(2)}]`
+//         //   )
+//         // }
+//         onClick={() => {
+//           const originalVectorLength = Math.sqrt(5*5 + 1*1 + (-5)*(-5));
+//           const radius = 19.9;
           
-          // Convert current marker position back to "HotspotImage-style" coordinates
-          const hotspotStylePos = position.clone().divideScalar(radius).multiplyScalar(originalVectorLength);
+//           // Convert current marker position back to "HotspotImage-style" coordinates
+//           const hotspotStylePos = position.clone().divideScalar(radius).multiplyScalar(originalVectorLength);
 
-          alert(
-            `Hotspot-style position: [${hotspotStylePos.x.toFixed(2)}, ${hotspotStylePos.y.toFixed(2)}, ${hotspotStylePos.z.toFixed(2)}]`
-          );
-        }}
-      >
-        <sphereGeometry args={[0.5, 16, 16]} />
-        <meshStandardMaterial color="red" />
-      </mesh>
-    </>
-  );
-}
+//           alert(
+//             `Hotspot-style position: [${hotspotStylePos.x.toFixed(2)}, ${hotspotStylePos.y.toFixed(2)}, ${hotspotStylePos.z.toFixed(2)}]`
+//           );
+//         }}
+//       >
+//         <sphereGeometry args={[0.5, 16, 16]} />
+//         <meshStandardMaterial color="red" />
+//       </mesh>
+//     </>
+//   );
+// }
 
 export default function TeaserPage() {
   return (
@@ -169,7 +170,7 @@ export default function TeaserPage() {
             onClick={() => alert("clicked on: MR BIRD")}
           /> */}
 
-          <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} />
+          {/* <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} /> */}
 
           <ambientLight intensity={0.5}/>
           <spotLight intensity={400} position={[0, 5, 10]} angle={0.3} />
