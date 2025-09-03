@@ -78,11 +78,24 @@ function HotspotImage({ position, src, width = 10, height = 10, onClick }: Hotsp
   const { camera } = useThree();
 
   // Make the plane always face the camera
+  // useFrame(() => {
+  //   if (meshRef.current) {
+  //     meshRef.current.lookAt(camera.position);
+  //   }
+  // });
+
+  // A better implementation that locks the roll so the plane stays upright
   useFrame(() => {
     if (meshRef.current) {
-      meshRef.current.lookAt(camera.position);
+      // Copy camera quaternion
+      const target = new THREE.Vector3();
+      camera.getWorldPosition(target);
+
+      // Look at camera, but force the "up" vector to world up (0,1,0)
+      meshRef.current.lookAt(target.x, meshRef.current.position.y, target.z);
     }
   });
+
 
   return (
     <group>
@@ -90,69 +103,65 @@ function HotspotImage({ position, src, width = 10, height = 10, onClick }: Hotsp
             <planeGeometry args={[width, height]} /> {/* use props */}
             <meshBasicMaterial map={texture} transparent /> {/* keep transparency if PNG */}
         </mesh>
-
-        <Html>
-            <div className="hotspot-image-marker"/>
-        </Html>
     </group>
   );
 }
 
-function DebugMarker({ initialPosition }: { initialPosition: THREE.Vector3 }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const transformRef = useRef<any>(null);
-  const [position, setPosition] = useState(initialPosition);
+// function DebugMarker({ initialPosition }: { initialPosition: THREE.Vector3 }) {
+//   const meshRef = useRef<THREE.Mesh>(null);
+//   const transformRef = useRef<any>(null);
+//   const [position, setPosition] = useState(initialPosition);
 
-  const { camera, gl } = useThree();
+//   const { camera, gl } = useThree();
 
-  // Only assign object when mesh exists
-  useEffect(() => {
-    if (meshRef.current && transformRef.current) {
-      transformRef.current.attach(meshRef.current);
-    }
-  }, []);
+//   // Only assign object when mesh exists
+//   useEffect(() => {
+//     if (meshRef.current && transformRef.current) {
+//       transformRef.current.attach(meshRef.current);
+//     }
+//   }, []);
 
-  // Keep marker on sphere
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.position.copy(
-        meshRef.current.position.clone().normalize().multiplyScalar(19.9)
-      );
-      setPosition(meshRef.current.position.clone());
-    }
-  });
+//   // Keep marker on sphere
+//   useFrame(() => {
+//     if (meshRef.current) {
+//       meshRef.current.position.copy(
+//         meshRef.current.position.clone().normalize().multiplyScalar(19.9)
+//       );
+//       setPosition(meshRef.current.position.clone());
+//     }
+//   });
 
-  return (
-    <>
-      <TransformControls ref={transformRef} camera={camera} domElement={gl.domElement} />
-      <mesh
-        ref={meshRef}
-        position={position}
-        // onClick={() =>
-        //   alert(
-        //     `Marker position: [${position.x.toFixed(2)}, ${position.y.toFixed(
-        //       2
-        //     )}, ${position.z.toFixed(2)}]`
-        //   )
-        // }
-        onClick={() => {
-          const originalVectorLength = Math.sqrt(5*5 + 1*1 + (-5)*(-5));
-          const radius = 19.9;
+//   return (
+//     <>
+//       <TransformControls ref={transformRef} camera={camera} domElement={gl.domElement} />
+//       <mesh
+//         ref={meshRef}
+//         position={position}
+//         // onClick={() =>
+//         //   alert(
+//         //     `Marker position: [${position.x.toFixed(2)}, ${position.y.toFixed(
+//         //       2
+//         //     )}, ${position.z.toFixed(2)}]`
+//         //   )
+//         // }
+//         onClick={() => {
+//           const originalVectorLength = Math.sqrt(5*5 + 1*1 + (-5)*(-5));
+//           const radius = 19.9;
           
-          // Convert current marker position back to "HotspotImage-style" coordinates
-          const hotspotStylePos = position.clone().divideScalar(radius).multiplyScalar(originalVectorLength);
+//           // Convert current marker position back to "HotspotImage-style" coordinates
+//           const hotspotStylePos = position.clone().divideScalar(radius).multiplyScalar(originalVectorLength);
 
-          alert(
-            `Hotspot-style position: [${hotspotStylePos.x.toFixed(2)}, ${hotspotStylePos.y.toFixed(2)}, ${hotspotStylePos.z.toFixed(2)}]`
-          );
-        }}
-      >
-        <sphereGeometry args={[0.5, 16, 16]} />
-        <meshStandardMaterial color="red" />
-      </mesh>
-    </>
-  );
-}
+//           alert(
+//             `Hotspot-style position: [${hotspotStylePos.x.toFixed(2)}, ${hotspotStylePos.y.toFixed(2)}, ${hotspotStylePos.z.toFixed(2)}]`
+//           );
+//         }}
+//       >
+//         <sphereGeometry args={[0.5, 16, 16]} />
+//         <meshStandardMaterial color="red" />
+//       </mesh>
+//     </>
+//   );
+// }
 
 export default function TeaserPage() {
     const [active, setActive] = useState<"Cloud Catching" | "Bird in the Hand" | "wireBox"| "Flashback" | null>(null);
@@ -182,22 +191,41 @@ export default function TeaserPage() {
   return (
     <div className={styles.page}>
 
-        {/* {active != null && (
+      <div className="relative w-full h-screen">
+      {active != null && (
             <div className={styles.soundContainer} onClick={() => setSoundOn(prev => !prev)}>
                 <span>
                     {soundOn ? <Unmute/> : <Mute/>}
                 </span>
                 <audio ref={audioRef} src={`/sounds/${active} Sample.wav`} loop/>
             </div>
-        )} */}
+        )} 
 
-      <div>
         <Canvas 
             camera={{ position: [0, 0, 10], fov: 120}}
             onPointerMissed={() => resetAll()}
         >
+
           <OrbitControls/>
+
           <Background />
+
+          {/* AMOND */}
+          <HotspotImage
+            position={new THREE.Vector3(-8, 3, 13.29).normalize().multiplyScalar(19.9)}
+            src="/panorama/amondwarp.png"
+            width={10}   // custom width
+            height={26}   // custom height
+            onClick={() => handleImageClick("Flashback")}
+          />
+
+          {/* AMOND LABEL */}
+          {active === "Flashback" && (
+            <Hotspot
+                position={new THREE.Vector3(-8, 15, 13.29).normalize().multiplyScalar(19.9)}
+                label="Download Flashback.wav"
+            />
+          )}
           
           {/* BIRD MAN */}
           <HotspotImage
@@ -206,7 +234,7 @@ export default function TeaserPage() {
             width={10}   // custom width
             height={30}   // custom height
             onClick={() => handleImageClick("Bird in the Hand")}
-          />
+            />
 
           {/* BIRD MAN LABEL */}
           {active === "Bird in the Hand" && (
@@ -233,10 +261,32 @@ export default function TeaserPage() {
             />
           )}
 
+
           <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} />
 
+          {/* WIREBOX */}
+          <HotspotImage
+            position={new THREE.Vector3(-4.15, -2, -5.24).normalize().multiplyScalar(19.9)}
+            src="/panorama/wirewarp.png"
+            width={11}   // custom width
+            height={11}   // custom height
+            onClick={() => handleImageClick("wireBox")}
+          />
+
+          {/* WIREBOX LABEL */}
+          {active === "wireBox" && (
+            <Hotspot
+                position={new THREE.Vector3(-4.15, 1, -5.24).normalize().multiplyScalar(19.9)}
+                label="Download wireBox.wav"
+            />
+          )}
+
+          {/* <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} /> */}
+
           <ambientLight intensity={0.5}/>
+        
           <spotLight intensity={400} position={[0, 5, 10]} angle={0.3} />
+
         </Canvas>
       </div>
     </div>

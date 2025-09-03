@@ -12,11 +12,6 @@
 }
 
 .soundContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.5rem; 
-
   position: fixed;    
   top: 1rem;            
   right: 1rem;      
@@ -25,7 +20,7 @@
   padding: 0.5rem 1rem; 
   border-radius: 8px;
   cursor: pointer;;
-  z-index: 1000;   
+  z-index: 10;   
 }
 
 .soundContainer svg {
