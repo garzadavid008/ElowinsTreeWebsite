@@ -262,7 +262,7 @@ export default function TeaserPage() {
           )}
 
 
-          <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} />
+          {/* <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} /> */}
 
           {/* WIREBOX */}
           <HotspotImage
