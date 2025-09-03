@@ -12,7 +12,7 @@ function Background() {
 
   const loader = new TextureLoader();
   const texture = loader.load(
-      "/tears_of_steel_bridge_2k_robot5.jpg",
+      "/tears_of_steel_bridge_2k.jpg",
   );
   texture.magFilter = THREE.LinearFilter; // what the flip is this?
   texture.minFilter = THREE.LinearFilter; // what the flip is this?
@@ -76,11 +76,24 @@ function HotspotImage({ position, src, width = 10, height = 10, onClick }: Hotsp
   const { camera } = useThree();
 
   // Make the plane always face the camera
+  // useFrame(() => {
+  //   if (meshRef.current) {
+  //     meshRef.current.lookAt(camera.position);
+  //   }
+  // });
+
+  // A better implementation that locks the roll so the plane stays upright
   useFrame(() => {
     if (meshRef.current) {
-      meshRef.current.lookAt(camera.position);
+      // Copy camera quaternion
+      const target = new THREE.Vector3();
+      camera.getWorldPosition(target);
+
+      // Look at camera, but force the "up" vector to world up (0,1,0)
+      meshRef.current.lookAt(target.x, meshRef.current.position.y, target.z);
     }
   });
+
 
   return (
     <mesh ref={meshRef} position={position} onClick={onClick}>
@@ -150,17 +163,28 @@ export default function TeaserPage() {
   return (
     <div className={styles.page}>
       <div>
-        <Canvas camera={{ position: [0, 0, 10], fov: 120}}>
+        <Canvas camera={{ position: [0, 0, 10], fov: 100}}>
+
           <OrbitControls/>
+
           <Background />
+
+          {/* AMOND */}
+          <HotspotImage
+            position={new THREE.Vector3(-4, 3, 15.29).normalize().multiplyScalar(19.9)}
+            src="/panorama/amondwarp.png"
+            width={10}   // custom width
+            height={26}   // custom height
+            onClick={() => alert("clicked on: flashback")}
+          />
           
           {/* BIRD MAN */}
           <HotspotImage
-            position={new THREE.Vector3(1.7, 1.9, 6.34).normalize().multiplyScalar(19.9)}
+            position={new THREE.Vector3(1.7, 1.8, 6.34).normalize().multiplyScalar(19.9)}
             src="/panorama/birdwarp.png"
             width={10}   // custom width
             height={30}   // custom height
-            onClick={() => alert("clicked on: MR BIRD")}
+            onClick={() => alert("clicked on: bird in the hand")}
           />
 
           {/* BIRD MAN LABEL */}
@@ -170,10 +194,21 @@ export default function TeaserPage() {
             onClick={() => alert("clicked on: MR BIRD")}
           /> */}
 
+          {/* WIREBOX */}
+          <HotspotImage
+            position={new THREE.Vector3(-3.15, 0, -5.24).normalize().multiplyScalar(19.9)}
+            src="/characters/wirefill.svg"
+            width={6}   // custom width
+            height={7}   // custom height
+            onClick={() => alert("clicked on: wirebox")}
+          />
+
           {/* <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} /> */}
 
           <ambientLight intensity={0.5}/>
+        
           <spotLight intensity={400} position={[0, 5, 10]} angle={0.3} />
+
         </Canvas>
       </div>
     </div>
