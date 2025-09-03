@@ -10,3 +10,35 @@
   width: 100%;
   height: 100%;
 }
+
+.soundContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem; 
+
+  position: fixed;    
+  top: 1rem;            
+  right: 1rem;      
+  
+  color: black;         
+  padding: 0.5rem 1rem; 
+  border-radius: 8px;
+  cursor: pointer;;
+  z-index: 1000;   
+}
+
+.soundContainer svg {
+  width: 5vw;
+  max-width: 30px;
+  height: auto;
+}
+
+.hotspotText {
+  background: white;
+  color: black;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 3.0rem;
+  font-family: 'Courier New', Courier, monospace;
+}

@@ -6,13 +6,15 @@ import { OrbitControls, Html, TransformControls } from "@react-three/drei";
 import { TextureLoader } from "three";
 import * as THREE from 'three'
 import styles from "./page.module.css";
+import Unmute from "@/components/Unmute"
+import Mute from "@/components/Mute"
 
 function Background() {
   const { scene } = useThree();
 
   const loader = new TextureLoader();
   const texture = loader.load(
-      "/tears_of_steel_bridge_2k_robot5.jpg",
+      "/tears_of_steel_bridge_2k.jpg",
   );
   texture.magFilter = THREE.LinearFilter; // what the flip is this?
   texture.minFilter = THREE.LinearFilter; // what the flip is this?
@@ -54,7 +56,7 @@ function Hotspot({ position, label, onClick }: HotspotProps){
       </mesh> 
       {/* Optional label that stays attached to the 3D point */} 
       <Html center distanceFactor={25}>
-          <div style={{ background: "rgba(0,0,0,0.7)", color: "white", padding: "10px 16px", borderRadius: "12px", fontSize: "96px", fontWeight: "bold", pointerEvents: "none", }} > 
+          <div className={styles.hotspotText} > 
             {label} 
           </div> 
         </Html> 
@@ -83,94 +85,155 @@ function HotspotImage({ position, src, width = 10, height = 10, onClick }: Hotsp
   });
 
   return (
-    <mesh ref={meshRef} position={position} onClick={onClick}>
-      <planeGeometry args={[width, height]} /> {/* use props */}
-      <meshBasicMaterial map={texture} transparent /> {/* keep transparency if PNG */}
-    </mesh>
+    <group>
+        <mesh ref={meshRef} position={position} onClick={onClick}>
+            <planeGeometry args={[width, height]} /> {/* use props */}
+            <meshBasicMaterial map={texture} transparent /> {/* keep transparency if PNG */}
+        </mesh>
+
+        <Html>
+            <div className="hotspot-image-marker"/>
+        </Html>
+    </group>
   );
 }
 
-// function DebugMarker({ initialPosition }: { initialPosition: THREE.Vector3 }) {
-//   const meshRef = useRef<THREE.Mesh>(null);
-//   const transformRef = useRef<any>(null);
-//   const [position, setPosition] = useState(initialPosition);
+function DebugMarker({ initialPosition }: { initialPosition: THREE.Vector3 }) {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const transformRef = useRef<any>(null);
+  const [position, setPosition] = useState(initialPosition);
 
-//   const { camera, gl } = useThree();
+  const { camera, gl } = useThree();
 
-//   // Only assign object when mesh exists
-//   useEffect(() => {
-//     if (meshRef.current && transformRef.current) {
-//       transformRef.current.attach(meshRef.current);
-//     }
-//   }, []);
+  // Only assign object when mesh exists
+  useEffect(() => {
+    if (meshRef.current && transformRef.current) {
+      transformRef.current.attach(meshRef.current);
+    }
+  }, []);
 
-//   // Keep marker on sphere
-//   useFrame(() => {
-//     if (meshRef.current) {
-//       meshRef.current.position.copy(
-//         meshRef.current.position.clone().normalize().multiplyScalar(19.9)
-//       );
-//       setPosition(meshRef.current.position.clone());
-//     }
-//   });
+  // Keep marker on sphere
+  useFrame(() => {
+    if (meshRef.current) {
+      meshRef.current.position.copy(
+        meshRef.current.position.clone().normalize().multiplyScalar(19.9)
+      );
+      setPosition(meshRef.current.position.clone());
+    }
+  });
 
-//   return (
-//     <>
-//       <TransformControls ref={transformRef} camera={camera} domElement={gl.domElement} />
-//       <mesh
-//         ref={meshRef}
-//         position={position}
-//         // onClick={() =>
-//         //   alert(
-//         //     `Marker position: [${position.x.toFixed(2)}, ${position.y.toFixed(
-//         //       2
-//         //     )}, ${position.z.toFixed(2)}]`
-//         //   )
-//         // }
-//         onClick={() => {
-//           const originalVectorLength = Math.sqrt(5*5 + 1*1 + (-5)*(-5));
-//           const radius = 19.9;
+  return (
+    <>
+      <TransformControls ref={transformRef} camera={camera} domElement={gl.domElement} />
+      <mesh
+        ref={meshRef}
+        position={position}
+        // onClick={() =>
+        //   alert(
+        //     `Marker position: [${position.x.toFixed(2)}, ${position.y.toFixed(
+        //       2
+        //     )}, ${position.z.toFixed(2)}]`
+        //   )
+        // }
+        onClick={() => {
+          const originalVectorLength = Math.sqrt(5*5 + 1*1 + (-5)*(-5));
+          const radius = 19.9;
           
-//           // Convert current marker position back to "HotspotImage-style" coordinates
-//           const hotspotStylePos = position.clone().divideScalar(radius).multiplyScalar(originalVectorLength);
+          // Convert current marker position back to "HotspotImage-style" coordinates
+          const hotspotStylePos = position.clone().divideScalar(radius).multiplyScalar(originalVectorLength);
 
-//           alert(
-//             `Hotspot-style position: [${hotspotStylePos.x.toFixed(2)}, ${hotspotStylePos.y.toFixed(2)}, ${hotspotStylePos.z.toFixed(2)}]`
-//           );
-//         }}
-//       >
-//         <sphereGeometry args={[0.5, 16, 16]} />
-//         <meshStandardMaterial color="red" />
-//       </mesh>
-//     </>
-//   );
-// }
+          alert(
+            `Hotspot-style position: [${hotspotStylePos.x.toFixed(2)}, ${hotspotStylePos.y.toFixed(2)}, ${hotspotStylePos.z.toFixed(2)}]`
+          );
+        }}
+      >
+        <sphereGeometry args={[0.5, 16, 16]} />
+        <meshStandardMaterial color="red" />
+      </mesh>
+    </>
+  );
+}
 
 export default function TeaserPage() {
+    const [active, setActive] = useState<"Cloud Catching" | "Bird in the Hand" | "wireBox"| "Flashback" | null>(null);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [soundOn, setSoundOn] = useState(true);
+
+    const handleImageClick = (song: "Cloud Catching" | "Bird in the Hand" | "wireBox" | "Flashback") => {
+        if (active === song){
+            const link = document.createElement("a");
+            link.href = `/${song}.wav`
+            link.download = song
+            link.click()
+        } else {
+            setActive(song)
+        }
+    }
+
+    const resetAll = () => setActive(null);
+
+    useEffect(() =>{
+        if (audioRef.current) {
+            audioRef.current.muted = !soundOn;
+            if (active) audioRef.current.play();
+          }
+    }, [active, soundOn]);
+
   return (
     <div className={styles.page}>
+
+        {/* {active != null && (
+            <div className={styles.soundContainer} onClick={() => setSoundOn(prev => !prev)}>
+                <span>
+                    {soundOn ? <Unmute/> : <Mute/>}
+                </span>
+                <audio ref={audioRef} src={`/sounds/${active} Sample.wav`} loop/>
+            </div>
+        )} */}
+
       <div>
-        <Canvas camera={{ position: [0, 0, 10], fov: 120}}>
+        <Canvas 
+            camera={{ position: [0, 0, 10], fov: 120}}
+            onPointerMissed={() => resetAll()}
+        >
           <OrbitControls/>
           <Background />
           
           {/* BIRD MAN */}
           <HotspotImage
-            position={new THREE.Vector3(1.7, 1.9, 6.34).normalize().multiplyScalar(19.9)}
+            position={new THREE.Vector3(2.5, 1.7, 7.00).normalize().multiplyScalar(19.9)}
             src="/panorama/birdwarp.png"
             width={10}   // custom width
             height={30}   // custom height
-            onClick={() => alert("clicked on: MR BIRD")}
+            onClick={() => handleImageClick("Bird in the Hand")}
           />
 
           {/* BIRD MAN LABEL */}
-          {/* <Hotspot
-            position={new THREE.Vector3(-1.7, 1.9, 6.34).normalize().multiplyScalar(19.9)}
-            label="MR BIRD"
-            onClick={() => alert("clicked on: MR BIRD")}
-          /> */}
+          {active === "Bird in the Hand" && (
+            <Hotspot
+                position={new THREE.Vector3(2.5, 9.00, 7.00).normalize().multiplyScalar(19.9)}
+                label="Download Bird in the Hand.wav"
+            />
+          )}
 
-          {/* <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} /> */}
+          {/* CloudCatching */}
+          <HotspotImage
+            position={new THREE.Vector3(6.90, 1.38, -2.50).normalize().multiplyScalar(20)}
+            src="/panorama/cloudwarp.png"
+            width={25}   // custom width
+            height={36}   // custom height
+            onClick={() => handleImageClick("Cloud Catching")}
+          />
+
+          {/* Cloud Catching */}
+          {active === "Cloud Catching" && (
+            <Hotspot
+                position={new THREE.Vector3(8.90, 9.38, -2.50).normalize().multiplyScalar(19.9)}
+                label="Download Cloud Catching.wav"
+            />
+          )}
+
+          <DebugMarker initialPosition={new THREE.Vector3(5, 1, -5)} />
 
           <ambientLight intensity={0.5}/>
           <spotLight intensity={400} position={[0, 5, 10]} angle={0.3} />
