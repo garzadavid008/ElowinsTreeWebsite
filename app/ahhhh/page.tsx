@@ -197,7 +197,7 @@ export default function TeaserPage() {
           {/* WIREBOX */}
           <HotspotImage
             position={new THREE.Vector3(-3.15, 0, -5.24).normalize().multiplyScalar(19.9)}
-            src="/characters/wirefill.svg"
+            src="/panorama/wirewarp.png"
             width={6}   // custom width
             height={7}   // custom height
             onClick={() => alert("clicked on: wirebox")}
