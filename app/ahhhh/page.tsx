@@ -46,6 +46,16 @@ type HotspotProps = {
   onClick?: () => void;
 };
 
+function PreloadTextures() {
+    useLoader(THREE.TextureLoader, [
+      "/panorama/amondwarp.png",
+      "/panorama/birdwarp.png",
+      "/panorama/cloudwarp.png",
+      "/panorama/wirewarp.png",
+    ]);
+    return null; // nothing to render, just loads into cache
+  }
+
 function Hotspot({ position, label, onClick }: HotspotProps){ 
   return (
     <group position={position}>
@@ -209,6 +219,8 @@ export default function TeaserPage() {
           <OrbitControls/>
 
           <Background />
+
+          <PreloadTextures />  
 
           {/* AMOND */}
           <HotspotImage
