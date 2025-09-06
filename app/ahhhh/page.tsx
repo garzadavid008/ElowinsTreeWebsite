@@ -47,13 +47,22 @@ type HotspotProps = {
 };
 
 function PreloadTextures() {
-    useLoader(THREE.TextureLoader, [
+    const textures = useLoader(THREE.TextureLoader, [
       "/panorama/amondwarp.png",
       "/panorama/birdwarp.png",
       "/panorama/cloudwarp.png",
       "/panorama/wirewarp.png",
     ]);
-    return null; // nothing to render, just loads into cache
+  
+    const { gl } = useThree();
+  
+    useEffect(() => {
+      textures.forEach(tex => {
+        gl.initTexture(tex); // 👈 manually upload to GPU
+      });
+    }, [textures, gl]);
+  
+    return null;
   }
 
 function Hotspot({ position, label, onClick }: HotspotProps){ 
