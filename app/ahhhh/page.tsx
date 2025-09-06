@@ -207,7 +207,7 @@ export default function TeaserPage() {
                 <span>
                     {soundOn ? <Unmute/> : <Mute/>}
                 </span>
-                <audio ref={audioRef} src={`/sounds/${active} Sample.wav`} loop/>
+                <audio ref={audioRef} src={`/sounds/${active} Sample.mp3`} loop/>
             </div>
         )} 
 
