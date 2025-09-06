@@ -227,6 +227,7 @@ export default function TeaserPage() {
             <Hotspot
                 position={new THREE.Vector3(-8, 15, 13.29).normalize().multiplyScalar(19.9)}
                 label="Download Flashback.wav"
+                onClick={() => handleImageClick("Flashback")}
             />
           )}
           
@@ -244,23 +245,34 @@ export default function TeaserPage() {
             <Hotspot
                 position={new THREE.Vector3(2.5, 9.00, 7.00).normalize().multiplyScalar(19.9)}
                 label="Download Bird in the Hand.wav"
+                onClick={() => handleImageClick("Bird in the Hand")}
             />
           )}
 
           {/* CloudCatching */}
-          <HotspotImage
+          {active === "Cloud Catching" ? 
+            <HotspotImage
+            position={new THREE.Vector3(6.90, 1.38, -2.50).normalize().multiplyScalar(20)}
+            src="/panorama/cloudwarpcolor.svg"
+            width={25}   // custom width
+            height={36}   // custom height
+            onClick={() => handleImageClick("Cloud Catching")}
+            /> :
+            <HotspotImage
             position={new THREE.Vector3(6.90, 1.38, -2.50).normalize().multiplyScalar(20)}
             src="/panorama/cloudwarp.png"
             width={25}   // custom width
             height={36}   // custom height
             onClick={() => handleImageClick("Cloud Catching")}
           />
+            }   
 
           {/* Cloud Catching */}
           {active === "Cloud Catching" && (
             <Hotspot
                 position={new THREE.Vector3(8.90, 9.38, -2.50).normalize().multiplyScalar(19.9)}
                 label="Download Cloud Catching.wav"
+                onClick={() => handleImageClick("Cloud Catching")}
             />
           )}
 
@@ -281,6 +293,7 @@ export default function TeaserPage() {
             <Hotspot
                 position={new THREE.Vector3(-4.15, 1, -5.24).normalize().multiplyScalar(19.9)}
                 label="Download wireBox.wav"
+                onClick={() => handleImageClick("wireBox")}
             />
           )}
 
