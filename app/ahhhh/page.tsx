@@ -5,17 +5,19 @@ import { OrbitControls, Html, TransformControls } from "@react-three/drei";
 
 import { TextureLoader } from "three";
 import * as THREE from 'three'
+
 import styles from "./page.module.css";
 import Unmute from "@/components/Unmute"
 import Mute from "@/components/Mute"
 
 function Background() {
-  const { scene } = useThree();
 
-  const loader = new TextureLoader();
-  const texture = loader.load(
-      "/tears_of_steel_bridge_2k.jpg",
-  );
+  const texture = useLoader(THREE.TextureLoader, "/tears_of_steel_bridge_2k.jpg");
+  texture.colorSpace = THREE.SRGBColorSpace;
+
+  const { scene } = useThree();
+  scene.background = texture;
+
   texture.magFilter = THREE.LinearFilter; // what the flip is this?
   texture.minFilter = THREE.LinearFilter; // what the flip is this?
   texture.colorSpace = THREE.SRGBColorSpace;
@@ -46,24 +48,6 @@ type HotspotProps = {
   onClick?: () => void;
 };
 
-function PreloadTextures() {
-    const textures = useLoader(THREE.TextureLoader, [
-      "/panorama/amondwarp.png",
-      "/panorama/birdwarp.png",
-      "/panorama/cloudwarp.png",
-      "/panorama/wirewarp.png",
-    ]);
-  
-    const { gl } = useThree();
-  
-    useEffect(() => {
-      textures.forEach(tex => {
-        gl.initTexture(tex); // 👈 manually upload to GPU
-      });
-    }, [textures, gl]);
-  
-    return null;
-  }
 
 function Hotspot({ position, label, onClick }: HotspotProps){ 
   return (
@@ -227,9 +211,7 @@ export default function TeaserPage() {
 
           <OrbitControls/>
 
-          <Background />
-
-          <PreloadTextures />  
+          <Background /> 
 
           {/* AMOND */}
           <HotspotImage
