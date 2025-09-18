@@ -25,15 +25,16 @@ export default function StopMotionPage() {
           fill
         />
 
-        {/* <div className={styles.button}>
+        {/*Button to change to side b*/}
+        <div className={styles.handleButton}>
           <button>
-            <div className="button-outer">
-              <div className="button-inner">
+            <div className={styles.buttonOuter}>
+              <div className={styles.buttonInner}>
                 <span>Side B</span>
               </div>
             </div>
           </button>
-        </div> */}
+        </div> 
       
         <div className={styles.chatcontainer}>
           <h1>{`As they go down
