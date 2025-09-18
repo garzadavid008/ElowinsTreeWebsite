@@ -20,9 +20,11 @@ export default function StopMotionPage() {
     <div>
       <div className={styles.sideA}>
         <Image
-          src="/Side_A_bg.png"
+          src="/Side_A_bg.webp"
           alt="Side A Background"
           fill
+          style={{ objectFit: "cover" }}
+          priority
         />
 
         {/*Button to change to side b*/}
@@ -85,8 +87,8 @@ export default function StopMotionPage() {
           <Image
             src="/characters/KITESPRITE.png"
             alt="Kite"
-            width={50}
-            height={80}
+            width={500}
+            height={800}
             style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
           />
         </div>
