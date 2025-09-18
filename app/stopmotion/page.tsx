@@ -36,7 +36,7 @@ export default function StopMotionPage() {
         </div> */}
       
         <div className={styles.chatcontainer}>
-          <h1>As they go down
+          <h1>{`As they go down
               And as the leaves will
               Follow all around
               Do you remember
@@ -67,7 +67,7 @@ export default function StopMotionPage() {
               Under the ground
               The rain will rot
               As they go
-              They can't see why
+              They cant see why
               As they go
               They say goodbye
               As they go
@@ -76,7 +76,7 @@ export default function StopMotionPage() {
               It will find you
               What was lost
               Under the ground
-              The rain will rot
+              The rain will rot`}
           </h1>
         </div>
 
