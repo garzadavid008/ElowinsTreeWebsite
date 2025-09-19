@@ -31,6 +31,24 @@ body::before {
     filter: grayscale(0) contrast(1) saturate(1.15); 
 }
 
+.soundContainer {
+  position: fixed;    
+  top: 1rem;            
+  right: 1rem;      
+  
+  color: black;         
+  padding: 0.5rem 1rem; 
+  border-radius: 8px;
+  cursor: pointer;;
+  z-index: 10;   
+}
+
+.soundContainer svg {
+  filter: invert(1);
+  width: 8vw;
+  max-width: 30px;
+  height: auto;
+}
 
 .playButton {
   margin-top: 20px;
@@ -39,16 +57,24 @@ body::before {
   cursor: pointer;
 }
 
-.character {
+.kiteCharacter {
   position: absolute;
   bottom: 24vh;
-  left: 40vw;
-  width: 150px; 
+  left: 39vw;
+  width: 100px; 
   height: auto;  
-  animation: moveCharacter 5s steps(1) infinite; /* adjust speed */
+  animation: moveKiteCharacter 5s steps(1) infinite; /* adjust speed */
 }
 
-@keyframes moveCharacter {
+.aayCharacter {
+  position: absolute;
+  bottom: 14vh;
+  left: 39vw;
+  width: 54px; 
+  height: auto; 
+}
+
+@keyframes moveKiteCharacter {
   0%   { transform: translate(0, 0); }
   14%  { transform: translate(-9vw, -17vh); }
   28%  { transform: translate(-19vw, -34vh); }
@@ -58,10 +84,25 @@ body::before {
   100% { transform: translate(0, 0); }
 }
 
+@media (orientation: portrait) {
+
+  @keyframes moveKiteCharacter {
+    0%   { transform: translate(-4vw, 0); }
+    14%  { transform: translate(-13vw, -17vh); }
+    28%  { transform: translate(-21vw, -34vh); }
+    42%  { transform: translate(-36vw, -16vh); }
+    56%  { transform: translate(-28vw, 0);}
+    70% { transform: translate(-17vw, 18vh); }  
+    100% { transform: translate(0, 0); }
+  }
+
+}
+
 .chatcontainer {
   display: block;
   letter-spacing: -10px;
   position: absolute;
+  z-index: 100;
   top: 0;
   right: 0;
   overflow-y: scroll;

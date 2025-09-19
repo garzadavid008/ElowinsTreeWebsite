@@ -4,13 +4,34 @@ import Image from "next/image";
 import styles from "./stopmotion.module.css";
 import Unmute from "@/components/Unmute"
 import Mute from "@/components/Mute"
+import { is } from "@/node_modules/@react-three/fiber/dist/declarations/src/core/utils";
 
 export default function StopMotionPage() {
+  const [isSideA, setIsSideA] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [soundOn, setSoundOn] = useState(false);
+
+  const toggleSound = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    } 
+  }
+
+  const handleImageClick = () => {
+    if (isSideA){
+        const link = document.createElement("a");
+        link.href = `/All Around You.wav`
+        link.download = "All Around You"
+        link.click()
+    } 
+}
 
   
-  useEffect(() => {
-
-  }, []);
+  useEffect(() =>{
+    if (audioRef.current) {
+        audioRef.current.muted = !soundOn;
+      }
+}, [soundOn]);
 
   useEffect(() => {
 
@@ -18,28 +39,43 @@ export default function StopMotionPage() {
 
   return (
     <div>
-      <div className={styles.sideA}>
+      <div className={styles.soundContainer} 
+        onClick={() => {
+          setSoundOn(prev => !prev);
+          toggleSound();
+          }
+        }
+      >
+        <span>
+          {soundOn ? <Unmute/> : <Mute/>}
+        </span>
+        <audio ref={audioRef} src={isSideA ? `/sounds/OTKUTT Sample.mp3` : "/sounds/AAY Sample.mp3"} loop/>
+      </div>
+
+      <div className={isSideA ? styles.sideA : styles.sideB}>
         <Image
-          src="/Side_A_bg.webp"
-          alt="Side A Background"
+          src={isSideA ? "/side_a_bg.webp" : "/side_b_bg.png"}
+          alt={isSideA ? "Side A Background" : "Side B Background"}
           fill
-          style={{ objectFit: "cover" }}
-          priority
         />
 
         {/*Button to change to side b*/}
         <div className={styles.handleButton}>
-          <button>
+          <button onClick={() => {
+            setIsSideA(!isSideA);
+            setSoundOn(false);
+            } 
+            }>
             <div className={styles.buttonOuter}>
               <div className={styles.buttonInner}>
-                <span>Side B</span>
+                <span>{isSideA ? "Side B": "Side A"}</span>
               </div>
             </div>
           </button>
         </div> 
       
         <div className={styles.chatcontainer}>
-          <h1>{`As they go down
+          <h1>{isSideA ? `As they go down
               And as the leaves will
               Follow all around
               Do you remember
@@ -79,19 +115,28 @@ export default function StopMotionPage() {
               It will find you
               What was lost
               Under the ground
-              The rain will rot`}
+              The rain will rot`: "IIIIIIIII"}
           </h1>
         </div>
 
-        <div className={styles.character}>
-          <Image
-            src="/characters/KITESPRITE.png"
-            alt="Kite"
-            width={500}
-            height={800}
-            style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
-          />
-        </div>
+          <div className={isSideA ? styles.kiteCharacter : styles.aayCharacter}>
+            {isSideA ?
+              <Image
+              src="/characters/KITESPRITE.png"
+              alt="Kite"
+              width={500}
+              height={800}
+              style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
+              /> :
+              <Image
+              src="/characters/AroundFill.svg"
+              alt="All Around You"
+              width={500}
+              height={800}
+              style={{ width: '100%', maxWidth: '250px', height: 'auto' }}
+              />
+            } 
+          </div>
       </div>
     </div>
   );
