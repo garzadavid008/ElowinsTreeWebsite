@@ -17,11 +17,11 @@ export default function Home() {
           <div className={styles.rectangle}></div>
         </div>
 
-        <div className={`${styles.robotChar}`}>
+        {/* <div className={`${styles.robotChar}`}>
           <Link href="/ahhhh">
             <Robot/>
           </Link>
-        </div>
+        </div> */}
 
         <div className={styles.dollKevContainer}>
           <div className={styles.dollChar}>

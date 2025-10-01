@@ -1,18 +1,330 @@
-
-.page{
-    background: blue;
-    margin: 0 auto;
-    padding: 0 1rem;  
-    min-height: auto;
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
-.main {
+.page {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-color: #292929; 
+    filter: grayscale(0) contrast(1) saturate(1.15); 
+}
+.noiseLayer {
+  content: "";
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/noiselayer.webp'); 
+  background-repeat: repeat;
+  opacity: 1; 
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.soundContainer {
+  position: fixed;    
+  top: 1rem;            
+  right: 1rem;      
+  
+  color: black;         
+  padding: 0.5rem 1rem; 
+  border-radius: 8px;
+  cursor: pointer;;
+  z-index: 10;   
+}
+
+.soundContainer svg {
+  filter: invert(1);
+  width: 8vw;
+  max-width: 30px;
+  height: auto;
+}
+
+.playButton {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.kiteCharacter {
+  position: absolute;
+  bottom: 24vh;
+  left: 15vw;
+  width: 100px; 
+  height: auto;  
+}
+
+.kiteCharacterActive { 
+  animation: moveKiteCharacter 5s steps(1) infinite; 
+}
+
+.aayCharacter {
+  position: absolute;
+  transform: scaleX(-1);
+  bottom: 14vh;
+  left: 19vw;
+  width:60px; 
+  height: auto; 
+}
+
+.aayCharacterActive {
+  animation: moveAayCharacter 5s steps(1) infinite;
+}
+
+@keyframes moveKiteCharacter {
+    0%   { transform: translate(0vw, 0vh); } 
+    14%  { transform: translate(17vw, 19vh); }
+    28%  { transform: translate(26vw, 0); }
+    42%  { transform: translate(17vw, -17vh); }
+    56%  { transform: translate(7vw, -34vh); }
+    70% { transform: translate(-7vw, -16vh); }
+    100% { transform: translate(-28vw, 0);}
+}
+
+@media (orientation: portrait) {
+
+  @keyframes moveKiteCharacter {
+    0%   { transform: translate(0vw, 0vh); } 
+    14%  { transform: translate(17vw, 19vh); }
+    28%  { transform: translate(26vw, 0); }
+    42%  { transform: translate(17vw, -17vh); }
+    56%  { transform: translate(7vw, -34vh); }
+    70% { transform: translate(-7vw, -16vh); }
+    100% { transform: translate(-28vw, 0);}
+  }
+}
+
+@keyframes moveAayCharacter {
+  0% {transform: translate(0) scaleX(-1);}
+  10% {transform: translate(12vw) scaleX(-1);}
+  20% {transform: translate(24vw) scaleX(-1);}
+  30% {transform: translate(36vw) scaleX(-1)}
+  40% {transform: translate(48vw) scaleX(-1);}
+  50% {transform: translate(48vw)}
+  60% {transform: translate(36vw)}
+  70% {transform: translate(24vw)}
+  80% {transform: translate(12vw);}
+  90% {transform: translate(0);}
+}
+
+@media (orientation: landscape) {
+  @keyframes moveAayCharacter {
+    0% {transform: translate(0);}
+    12% {transform: translate(-12vw);}
+    24% {transform: translate(-23vw);}
+    36% {transform: translate(-12vw) scaleX(-1)}
+    48% {transform: translate(0) scaleX(-1);}
+    60% {transform: translate(12vw) scaleX(-1)}
+    72% {transform: translate(25vw) scaleX(-1);}
+    84% {transform: translate(12vw)}
+    100% {transform: translate(0);}
+  }
+
+}
+
+.downloadContainer {
+  background: white;
+  color: black;
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-size: 1.0rem;
+  font-family: 'Courier New', Courier, monospace;
+  position: absolute;
+  top: 5rem;
+  left: 1rem;
+
+  width: 30vw;       /* set fixed width */
+  text-align: center; /* center the words inside */
+}
+
+.chatcontainer {
+  display: block;
+  letter-spacing: -10px;
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 16px;
+  margin-right: 1rem;
+  margin-top: 5rem;
+  margin-bottom: 0;
+  width: 50%;
+  height: 90vh;
+
+  font-family: "Noto Serif", serif;
+  font-style: italic;
+  font-weight: normal;
+  font-size: 50px;
+  line-height: 112px;
+  text-align: justify;
+  color: white;
+  mix-blend-mode: exclusion;
+}
+
+/* ============= SCROLL BAR STUFF ============= */
+.chatcontainer {
+  overflow-y: scroll;  
+  scrollbar-width: none;  
+  -ms-overflow-style: none; 
+  padding-right: 1rem; 
+  padding-left: 1rem; 
+}
+
+.chatcontainer::-webkit-scrollbar {
+  display: none;
+}
+/* ============================================ */
+
+.chatcontainer h1 {
+  margin: 0;
+  margin-bottom: 0;
+}
+
+.handleButton {
+    top: 1rem;
+    left: 1rem;
+    position: absolute;
+    overflow: hidden;
+
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
-    min-height: 100vh;
-    max-width: 1200px;  
-    margin: 0 auto;        
-    padding: 0 1rem;        
+    flex-direction: column;
+    gap: 0.5rem;            
 }
+
+.handleButton button {
+  all: unset;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  position: relative;
+  border-radius: 999vw;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: -0.15em -0.15em 0.15em -0.075em rgba(5, 5, 5, 0.25),
+      0.0375em 0.0375em 0.0675em 0 rgba(5, 5, 5, 0.1);
+}
+
+.handleButton button::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  width: calc(100% + 0.3em);
+  height: calc(100% + 0.3em);
+  top: -0.15em;
+  left: -0.15em;
+  border-radius: inherit;
+  background: linear-gradient(-135deg,
+          rgba(5, 5, 5, 0.5),
+          transparent 20%,
+          transparent 100%);
+  filter: blur(0.0125em);
+  opacity: 0.25;
+  mix-blend-mode: multiply;
+}
+
+.handleButton .buttonOuter {
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+  transition: box-shadow 300ms ease;
+  will-change: box-shadow;
+  box-shadow: 0 0.05em 0.05em -0.01em rgba(5, 5, 5, 1),
+      0 0.01em 0.01em -0.01em rgba(5, 5, 5, 0.5),
+      0.15em 0.3em 0.1em -0.01em rgba(5, 5, 5, 0.25);
+}
+
+.handleButton button:hover .buttonOuter {
+  box-shadow: 0 0 0 0 rgba(5, 5, 5, 1), 0 0 0 0 rgba(5, 5, 5, 0.5),
+      0 0 0 0 rgba(5, 5, 5, 0.25);
+}
+
+.handleButton .buttonInner {
+  --inset: 0.035em;
+  position: relative;
+  z-index: 1;
+  border-radius: inherit;
+  padding: .5em 1em;
+  background-image: linear-gradient(135deg,
+          rgb(172, 171, 171),
+          rgb(182, 182, 182));
+  transition: box-shadow 300ms ease, clip-path 250ms ease,
+      background-image 250ms ease, transform 250ms ease;
+  will-change: box-shadow, clip-path, background-image, transform;
+  overflow: clip;
+  clip-path: inset(0 0 0 0 round 999vw);
+  box-shadow:
+      
+      0 0 0 0 inset rgba(5, 5, 5, 0.1),
+     
+      -0.05em -0.05em 0.05em 0 inset rgba(5, 5, 5, 0.25),
+      
+      0 0 0 0 inset rgba(5, 5, 5, 0.1),
+     
+      0 0 0.05em 0.2em inset rgba(255, 255, 255, 0.25),
+     
+      0.025em 0.05em 0.1em 0 inset rgba(255, 255, 255, 1),
+     
+      0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+     
+      -0.075em -0.25em 0.25em 0.1em inset rgba(5, 5, 5, 0.25);
+}
+
+.handleButton button:hover .buttonInner {
+  clip-path: inset(clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) clamp(1px, 0.0625em, 2px) round 999vw);
+  box-shadow:
+      
+      0.1em 0.15em 0.05em 0 inset rgba(5, 5, 5, 0.75),
+     
+      -0.025em -0.03em 0.05em 0.025em inset rgba(5, 5, 5, 0.5),
+      
+      0.25em 0.25em 0.2em 0 inset rgba(5, 5, 5, 0.5),
+      
+      0 0 0.05em 0.5em inset rgba(255, 255, 255, 0.15),
+      
+      0 0 0 0 inset rgba(255, 255, 255, 1),
+     
+      0.12em 0.12em 0.12em inset rgba(255, 255, 255, 0.25),
+     
+      -0.075em -0.12em 0.2em 0.1em inset rgba(5, 5, 5, 0.25);
+}
+
+.handleButton .buttonInner span {
+  position: relative;
+  z-index: 4;
+  font-family: "Inter", sans-serif;
+  letter-spacing: -0.05em;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0);
+  background-image: linear-gradient(135deg,
+          rgba(25, 25, 25, 1),
+          rgba(75, 75, 75, 1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: transform 250ms ease;
+  display: block;
+  text-align: center;
+  will-change: transform;
+  text-shadow: rgba(0, 0, 0, 0.1) 0 0 0.1em;
+  -webkit-user-select: none; 
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.handleButton button:hover .buttonInner span {
+  transform: scale(0.975);
+}
+
+.handleButton button:active .buttonInner {
+  transform: scale(0.975);
+} 
