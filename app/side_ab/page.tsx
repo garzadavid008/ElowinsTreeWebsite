@@ -65,7 +65,7 @@ export default function SideABPage() {
 
 
       <div className={styles.page}>
-        
+
         <div className={styles.noiseLayer}></div>
     
         </div>
@@ -203,7 +203,7 @@ export default function SideABPage() {
               }}
               /> :
               <Image
-              src="/characters/AroundFill.svg"
+              src={isCharSelected ? "/characters/AroundColor.png" : "/characters/AroundFill.svg"}
               alt="All Around You"
               width={500}
               height={800}

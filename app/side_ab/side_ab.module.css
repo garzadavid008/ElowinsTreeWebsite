@@ -62,6 +62,7 @@ html, body {
   left: 15vw;
   width: 100px; 
   height: auto;  
+  cursor: pointer;
 }
 
 .kiteCharacterActive { 
@@ -70,6 +71,7 @@ html, body {
 
 .aayCharacter {
   position: absolute;
+  cursor: pointer;
   transform: scaleX(-1);
   bottom: 14vh;
   left: 19vw;
@@ -134,6 +136,7 @@ html, body {
 
 .downloadContainer {
   background: white;
+  cursor: pointer;
   color: black;
   padding: 2px 4px;
   border-radius: 2px;

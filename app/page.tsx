@@ -27,11 +27,11 @@ export default function Home() {
           <div className={styles.dollChar}>
             <Link href="/thedoll">
             <Image
-              src="/characters/DollFill.svg"
+              src="/characters/DollColor.png"
               alt="Doll"
               width={200} 
               height={200}  
-              style={{ width: "75%", height: "auto", objectFit: "contain" }}
+              style={{ width: "100%", height: "auto", objectFit: "contain" }}
             />
   
             </Link>
@@ -40,7 +40,7 @@ export default function Home() {
           <div className={styles.kevinChar}>
             <Link href="/side_ab">
               <Image
-                src="/characters/KevinFill.svg"
+                src="/characters/KevinColor.png"
                 alt="Kevin"
                 width={200} 
                 height={200}  
