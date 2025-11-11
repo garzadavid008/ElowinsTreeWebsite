@@ -11,6 +11,7 @@ export default function SideABPage() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [soundOn, setSoundOn] = useState(true);
   const [isCharSelected, setCharSelected] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false);
 
 
   const handleDownload = () => {
@@ -66,17 +67,26 @@ export default function SideABPage() {
 
       <div className={styles.page}>
 
+        {!isLoaded && (
+          <div className={styles.loader}>
+            <Image src="/loading.jpg"  width= {200} height={200}alt="Loading" className={styles.loadingPic}/>
+          </div>
+        )}
+
         <div className={styles.noiseLayer}></div>
+
     
         </div>
         <Image
           src={isSideA ? "/side_a_bg.png" : "/side_b_bg.png"}
           alt={isSideA ? "Side A Background" : "Side B Background"}
           fill
+          onLoadingComplete={() => setIsLoaded(true)}
           priority
         />
 
-        {/*Button to change to side b*/}
+        {isLoaded && (
+          <>
         <div className={styles.handleButton}>
           <button onClick={() => {
             setIsSideA(!isSideA);
@@ -217,6 +227,8 @@ export default function SideABPage() {
               />
             } 
           </div>
+          </>
+          )}
       </div>
   );
 }

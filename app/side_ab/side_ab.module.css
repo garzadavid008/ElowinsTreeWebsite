@@ -15,6 +15,28 @@ html, body {
     background-color: #292929; 
     filter: grayscale(0) contrast(1) saturate(1.15); 
 }
+
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99999; /* above everything else */
+  transition: opacity 0.6s ease;
+  opacity: 1;
+}
+
+.loadingPic {
+  width: 200px;
+  height: auto;
+  filter: invert(1)
+}
+
 .noiseLayer {
   content: "";
   position: fixed; 
