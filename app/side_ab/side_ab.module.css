@@ -58,7 +58,7 @@ html, body {
 
 .kiteCharacter {
   position: absolute;
-  bottom: 24vh;
+  bottom: 24dvh;
   left: 15vw;
   width: 100px; 
   height: auto;  
@@ -73,7 +73,7 @@ html, body {
   position: absolute;
   cursor: pointer;
   transform: scaleX(-1);
-  bottom: 14vh;
+  bottom: 14dvh;
   left: 19vw;
   width:60px; 
   height: auto; 
@@ -85,11 +85,11 @@ html, body {
 
 @keyframes moveKiteCharacter {
     0%   { transform: translate(0vw, 0vh); } 
-    14%  { transform: translate(17vw, 19vh); }
+    14%  { transform: translate(17vw, 19dvh); }
     28%  { transform: translate(26vw, 0); }
-    42%  { transform: translate(17vw, -17vh); }
-    56%  { transform: translate(7vw, -34vh); }
-    70% { transform: translate(-7vw, -16vh); }
+    42%  { transform: translate(17vw, -17dvh); }
+    56%  { transform: translate(7vw, -34dvh); }
+    70% { transform: translate(-7vw, -16dvh); }
     100% { transform: translate(-28vw, 0);}
 }
 
@@ -97,11 +97,11 @@ html, body {
 
   @keyframes moveKiteCharacter {
     0%   { transform: translate(0vw, 0vh); } 
-    14%  { transform: translate(17vw, 19vh); }
+    14%  { transform: translate(17vw, 19dvh); }
     28%  { transform: translate(26vw, 0); }
-    42%  { transform: translate(17vw, -17vh); }
-    56%  { transform: translate(7vw, -34vh); }
-    70% { transform: translate(-7vw, -16vh); }
+    42%  { transform: translate(17vw, -17dvh); }
+    56%  { transform: translate(7vw, -34dvh); }
+    70% { transform: translate(-7vw, -16dvh); }
     100% { transform: translate(-28vw, 0);}
   }
 }
@@ -164,7 +164,7 @@ html, body {
   margin-top: 5rem;
   margin-bottom: 0;
   width: 50%;
-  height: 90vh;
+  height: 90dvh;
 
   font-family: "Noto Serif", serif;
   font-style: italic;

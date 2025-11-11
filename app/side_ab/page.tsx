@@ -73,6 +73,7 @@ export default function SideABPage() {
           src={isSideA ? "/side_a_bg.png" : "/side_b_bg.png"}
           alt={isSideA ? "Side A Background" : "Side B Background"}
           fill
+          priority
         />
 
         {/*Button to change to side b*/}
