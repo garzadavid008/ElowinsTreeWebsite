@@ -53,13 +53,13 @@ function Hotspot({ position, label, onClick }: HotspotProps){
   return (
     <group position={position}>
       {/* Small sphere marker at a fixed spot */}
-      <mesh onClick={onClick}> 
+      <mesh> 
         <sphereGeometry args={[0.2, 16, 16]} />
         <meshStandardMaterial color="red" emissive="red" emissiveIntensity={0.6} /> 
       </mesh> 
       {/* Optional label that stays attached to the 3D point */} 
-      <Html center distanceFactor={25} style={{ pointerEvents: 'none' }}>
-          <div className={styles.hotspotText} > 
+      <Html center distanceFactor={25}>
+          <div className={styles.hotspotText} onClick={onClick} style={{cursor: 'pointer'}}> 
             {label} 
           </div> 
         </Html> 
@@ -70,7 +70,7 @@ function Hotspot({ position, label, onClick }: HotspotProps){
 type HotspotImageProps = {
   position: [number, number, number] | THREE.Vector3;
   src: string;
-  width?: number;   // optional, default value
+  width?: number;   
   height?: number;  // optional, default value
   onClick?: () => void;
 };
@@ -95,8 +95,8 @@ function HotspotImage({ position, src, width = 10, height = 10, onClick }: Hotsp
   return (
     <group>
         <mesh ref={meshRef} position={position} onClick={onClick}>
-            <planeGeometry args={[width, height]} /> {/* use props */}
-            <meshBasicMaterial map={texture} transparent /> {/* keep transparency if PNG */}
+            <planeGeometry args={[width, height]} /> 
+            <meshBasicMaterial map={texture} transparent /> 
         </mesh>
     </group>
   );
@@ -104,9 +104,9 @@ function HotspotImage({ position, src, width = 10, height = 10, onClick }: Hotsp
 
 function PreloadTextures() {
   useTexture.preload("/panorama/amondcolor.png");
-useTexture.preload("/panorama/birdcolor.png");
-useTexture.preload("/panorama/cloudwarpcolor.svg");
-useTexture.preload("/panorama/wirecolor.png");
+  useTexture.preload("/panorama/birdcolor.png");
+  useTexture.preload("/panorama/cloudwarpcolor.png");
+  useTexture.preload("/panorama/wirecolor.png");
   return null;
 }
 
@@ -220,9 +220,9 @@ export default function TeaserPage() {
           {/* CloudCatching */}
           {active === "Cloud Catching" ? 
             <HotspotImage
-            position={new THREE.Vector3(6.90, 1.38, -2.50).normalize().multiplyScalar(20)}
-            src="/panorama/cloudwarpcolor.svg"
-            width={25} 
+            position={new THREE.Vector3(6.50, 1.31, -2.50).normalize().multiplyScalar(20)}
+            src="/panorama/cloudwarpcolor.png"
+            width={24.5} 
             height={36}
             onClick={() => handleImageClick("Cloud Catching")}
             /> :
