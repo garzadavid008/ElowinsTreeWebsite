@@ -15,12 +15,6 @@ export default function SideABPage() {
 
 
   const handleDownload = () => {
-    const confirmDownload = window.confirm(
-      `Do you want to download ${isSideA ? "Over the Kite, Under the Tree" : "All Around You"}?`
-    );
-  
-    if (!confirmDownload) return;
-  
     const link = document.createElement("a");
     link.href = isSideA 
       ? "/Over the Kite, Under the Tree.wav" 
