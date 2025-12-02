@@ -129,29 +129,32 @@ html, body {
 }
 
 @keyframes moveAayCharacter {
-  0% {transform: translate(0) scaleX(-1);}
-  10% {transform: translate(12vw) scaleX(-1);}
-  20% {transform: translate(24vw) scaleX(-1);}
-  30% {transform: translate(36vw) scaleX(-1)}
-  40% {transform: translate(48vw) scaleX(-1);}
-  50% {transform: translate(48vw)}
-  60% {transform: translate(36vw)}
-  70% {transform: translate(24vw)}
-  80% {transform: translate(12vw);}
-  90% {transform: translate(0);}
+  0% {transform: translate(0dvw) scaleX(-1);}
+  10% {transform: translate(12dvw) scaleX(-1);}
+  20% {transform: translate(24dvw) scaleX(-1);}
+  30% {transform: translate(36dvw) scaleX(-1)}
+  40% {transform: translate(48dvw) scaleX(-1);}
+  50% {transform: translate(48dvw)}
+  60% {transform: translate(36dvw)}
+  70% {transform: translate(24dvw)}
+  80% {transform: translate(12dvw);}
+  90% {transform: translate(0dvw);}
+  100% {transform: translate(0dvw);}
 }
 
 @media (orientation: landscape) {
   @keyframes moveAayCharacter {
-    0% {transform: translate(0);}
-    12% {transform: translate(-12vw);}
-    24% {transform: translate(-23vw);}
-    36% {transform: translate(-12vw) scaleX(-1)}
-    48% {transform: translate(0) scaleX(-1);}
-    60% {transform: translate(12vw) scaleX(-1)}
-    72% {transform: translate(25vw) scaleX(-1);}
-    84% {transform: translate(12vw)}
-    100% {transform: translate(0);}
+    0% {transform: translate(0dvw) scaleX(-1);}
+    10% {transform: translate(12dvw) scaleX(-1);}
+    20% {transform: translate(24dvw) scaleX(-1);}
+    30% {transform: translate(36dvw) scaleX(-1)}
+    40% {transform: translate(48dvw) scaleX(-1);}
+    50% {transform: translate(48dvw)}
+    60% {transform: translate(36dvw)}
+    70% {transform: translate(24dvw)}
+    80% {transform: translate(12dvw);}
+    90% {transform: translate(0dvw);}
+    100% {transform: translate(0dvw);}
   }
 
 }

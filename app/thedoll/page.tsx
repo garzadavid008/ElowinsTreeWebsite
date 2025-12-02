@@ -153,7 +153,7 @@ export default function TeaserPage() {
             onPointerMissed={() => resetAll()}
         >
 
-          <OrbitControls enableZoom={false}/>
+          <OrbitControls enableZoom={false} enablePan={false}/>
 
           <PreloadTextures/>
 
